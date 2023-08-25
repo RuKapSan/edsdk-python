@@ -466,6 +466,14 @@ class DriveMode(IntEnum):
     SilentLowSpeedContinuous = 0x00000016
 
 
+Dr = {0x00000000: "Single Shooting", 0x00000001: "Continuous Shooting", 0x00000002: "Video",
+      0x00000004: "High Speed Continuous", 0x00000005: "Low Speed Continuous", 0x00000006: "Single Silent Shooting",
+      0x00000007: "Self Timer Continuous", 0x00000010: "Self Timer 10 Sec", 0x00000011: "Self Timer 2 Sec",
+      0x00000012: "Super High Speed 14 Fps", 0x00000013: "Silent Single Shooting",
+      0x00000014: "Silent Continuous Shooting", 0x00000015: "Silent High Speed Continuous",
+      0x00000016: "Silent Low Speed Continuous"}
+
+
 # PropID.ISOSpeed
 class ISOSpeedCamera(IntEnum):
     ISOAuto = 0x00000000
@@ -534,6 +542,9 @@ class MeteringMode(IntEnum):
     NotValid_NoSettingsChanges = 0xFFFFFFFF
 
 
+Me = {1: "Spot", 3: "Evaluative", 4: "Partial", 5: "Center-weighted average"}
+
+
 # PropID.AFMode
 class AFMode(IntEnum):
     OneShotAF = 0
@@ -542,6 +553,53 @@ class AFMode(IntEnum):
     ManualFocus = 3  # ReadOnly
     NotValid_NoSettingsChanges = 0xffffffff
 
+
+Af = {0: "One Shot AF", 1: "AI Servo AF", 2: "AI Focus AF", 3: "Manual Focus"}
+
+
+class ApertureValue(IntEnum):
+    F_1 = 0x08
+    F_1_1 = 0x0B
+    F_1_2 = 0x0C
+    F_1_2_1_3 = 0x0D
+    F_1_4 = 0x10
+    F_1_6 = 0x13
+    F_1_8 = 0x14
+    F_1_8_1_3 = 0x15
+    F_2 = 0x18
+    F_2_2 = 0x1B
+    F_2_5 = 0x1C
+    F_2_5_1_3 = 0x1D
+    F_2_8 = 0x20
+    F_3_2 = 0x23
+    F_3_4 = 0x85
+    F_3_5 = 0x24
+    F_3_5_1_3 = 0x25
+    F_4 = 0x28
+    F_4_5 = 0x2B
+    F_4_5_1_3 = 0x2C
+    F_5 = 0x2D
+    F_5_6 = 0x30
+    F_6_3 = 0x33
+    F_6_7 = 0x34
+    F_7_1 = 0x35
+    F_8 = 0x38
+    F_9 = 0x3B
+    F_9_5 = 0x3C
+    F_10 = 0x3D
+    F_11 = 0x40
+    F_13_1_3 = 0x43
+    F_13 = 0x44
+    F_14 = 0x45
+    F_16 = 0x48
+    F_18 = 0x4B
+    F_19 = 0x4C
+    F_20 = 0x4D
+    F_22 = 0x50
+    F_25 = 0x53
+    F_27 = 0x54
+    F_29 = 0x55
+    F_32 = 0x58
 
 # PropID.Av
 Av = {

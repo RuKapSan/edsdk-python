@@ -11,6 +11,9 @@ from edsdk import (
     Access,
     SaveTo,
     EdsObject,
+    DriveMode,
+    Av,
+    ApertureValue,
 )
 
 if os.name == "nt":
@@ -33,7 +36,7 @@ def save_image(object_handle: EdsObject, save_to: str) -> int:
     return 0
 
 
-def callback_property(event: PropertyEvent, property_id: PropID, parameter: int) -> int:
+def callback_property(event, property_id: PropID, parameter: int) -> int:
     print("event: ", event)
     print("Property changed:", property_id)
     print("Parameter:", parameter)
@@ -59,18 +62,23 @@ if __name__ == "__main__":
     cam = edsdk.GetChildAtIndex(cam_list, 0)
     edsdk.OpenSession(cam)
     edsdk.SetObjectEventHandler(cam, ObjectEvent.All, callback_object)
-    edsdk.SetPropertyData(cam, PropID.SaveTo, 0, SaveTo.Host)
-    print(edsdk.GetPropertyData(cam, PropID.SaveTo))
+    edsdk.SetPropertyData(cam, PropID.SaveTo, 0, SaveTo.Camera)
+    edsdk.SetPropertyData(cam, PropID.DriveMode, 0, DriveMode.SingleShooting)
 
-    # Sets HD Capacity to an arbitrary big value
-    edsdk.SetCapacity(
-        cam, {"reset": True, "bytesPerSector": 512, "numberOfFreeClusters": 2147483647}
-    )
-    print(edsdk.GetDeviceInfo(cam))
+    r = edsdk.GetPropertyDesc(cam, PropID.Av)
+    print(r)
 
-    edsdk.SendCommand(cam, CameraCommand.TakePicture, 0)
+    valid_avs = set(r["propDesc"])
 
-    time.sleep(4)
+    if ApertureValue.F_1 in valid_avs:
+        print(" is supported")
+
+    if ApertureValue.F_2 in valid_avs:
+        print(f"F{Av[ApertureValue.F_2]} is supported")
+
+
+
     if os.name == "nt":
         pythoncom.PumpWaitingMessages()
+
     edsdk.TerminateSDK()
