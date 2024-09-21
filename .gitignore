@@ -112,7 +112,7 @@ _skbuild/
 .DS_Store
 tags
 
-dependencies/*
+
 !**.gitkeep
 
 .vscode
